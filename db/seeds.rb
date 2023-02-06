@@ -26,21 +26,24 @@
     )
     puts "adding users👤"
 
-    3.times do
+    10.times do
         User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password_digest: '1234', age: Faker::Date.birthday(min_age: 18, max_age: 100), seeking_relationship: Faker::Boolean.boolean , address: Faker::Address.full_address)
     end
+
+
         puts "adding pets 🐶"
 
-        Pet.create(name: Faker::Creature::Dog.name, age: Faker::Creature::Dog.age, species: "dog" , breed: Faker::Creature::Dog.breed, open_to_breeding: Faker::Boolean.boolean, alteration:Faker::Boolean.boolean, mental_disorder: "anxeity" , active: Faker::Boolean.boolean,trained: Faker::Boolean.boolean, diet: Faker::Food.dish,  size: Faker::Creature::Dog.size )
+        Pet.create(name: Faker::Creature::Dog.name, age: Faker::Creature::Dog.age, species: "dog" , breed: Faker::Creature::Dog.breed, open_to_breeding: Faker::Boolean.boolean, alteration:Faker::Boolean.boolean, mental_disorder: "anxeity" , active: Faker::Boolean.boolean,trained: Faker::Boolean.boolean, diet: Faker::Food.dish,  size: Faker::Creature::Dog.size, owner_id: User.first.id)
 
-        Pet.create(name: Faker::Creature::Bird.common_name, age: "immature", species: "bird", breed: "Lovebirds", open_to_breeding: Faker::Boolean.boolean, alteration:Faker::Boolean.boolean, active: Faker::Boolean.boolean,trained: Faker::Boolean.boolean, diet: Faker::Food.dish, size: "medium")
+        Pet.create(name: Faker::Creature::Bird.common_name, age: "immature", species: "bird", breed: "Lovebirds", open_to_breeding: Faker::Boolean.boolean, alteration:Faker::Boolean.boolean, active: Faker::Boolean.boolean,trained: Faker::Boolean.boolean, diet: Faker::Food.dish, size: "medium", owner_id: User.second.id)
 
-        Pet.create(name: Faker::Creature::Cat.name, age: "Kitten", species:     "cat", breed: Faker::Creature::Cat.breed, open_to_breeding: Faker::Boolean.boolean, alteration: Faker::Boolean.boolean, active: Faker::Boolean.boolean, trained: Faker::Boolean.boolean, diet:Faker::Food.dish, size: "mini")
+        Pet.create(name: Faker::Creature::Cat.name, age: "Kitten", species:     "cat", breed: Faker::Creature::Cat.breed, open_to_breeding: Faker::Boolean.boolean, alteration: Faker::Boolean.boolean, active: Faker::Boolean.boolean, trained: Faker::Boolean.boolean, diet:Faker::Food.dish, size: "mini", owner_id: User.second.id)
      
         puts "adding bookings 📆"
       
-        2.times do
-            Booking.create(time: "2:00pm", date: Faker::Date.in_date_period(month: 2), pickup_location: Faker::Address.full_address, dropoff_location: Faker::Address.full_address, pet_only: Faker::Boolean.boolean)
+        4.times do
+            pet = Pet.all.sample
+            Booking.create!(time: "2:00pm", date: Faker::Date.in_date_period(month: 2), pickup_location: Faker::Address.full_address, dropoff_location: Faker::Address.full_address, pet_only: Faker::Boolean.boolean, lender_id: pet.owner.id, borrower_id: User.last(8).sample.id, pet_id: pet.id)
         end
             
         puts "pet_reviews"
