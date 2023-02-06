@@ -48,10 +48,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_05_063410) do
     t.string "pickup_location"
     t.string "dropoff_location"
     t.boolean "pet_only"
-    t.bigint "pet_id", null: false
+    t.integer "borrower_id"
+    t.integer "lender_id"
+    t.integer "pet_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["pet_id"], name: "index_bookings_on_pet_id"
   end
 
   create_table "pet_reviews", force: :cascade do |t|
@@ -75,6 +76,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_05_063410) do
     t.boolean "trained"
     t.string "diet"
     t.string "size"
+    t.integer "owner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -110,7 +112,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_05_063410) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "bookings", "pets"
   add_foreign_key "pet_reviews", "pets"
   add_foreign_key "tracker_devices", "pets"
 end

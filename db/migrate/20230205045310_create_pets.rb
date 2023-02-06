@@ -12,7 +12,7 @@ class CreatePets < ActiveRecord::Migration[7.0]
       t.boolean :trained
       t.string :diet
       t.string :size
-     
+      t.integer :owner_id
 
       t.timestamps
     end
