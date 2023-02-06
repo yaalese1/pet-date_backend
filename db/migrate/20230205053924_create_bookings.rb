@@ -7,8 +7,7 @@ class CreateBookings < ActiveRecord::Migration[7.0]
       t.string :pickup_location
       t.string :dropoff_location
       t.boolean :pet_only 
-      # belongs_to :user
-      # belongs_to :pet 
+     
     
 
 

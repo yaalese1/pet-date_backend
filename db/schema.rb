@@ -68,11 +68,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_05_063410) do
     t.string "species"
     t.string "breed"
     t.boolean "open_to_breeding"
-    t.boolean "neuter"
+    t.boolean "alteration"
     t.string "mental_disorder"
     t.boolean "active"
     t.boolean "trained"
     t.string "diet"
+    t.string "size"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -93,7 +94,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_05_063410) do
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.boolean "lender"
     t.string "email"
     t.string "password_digest"
     t.string "age"
