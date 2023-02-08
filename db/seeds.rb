@@ -14,7 +14,7 @@
  puts "destroying DB"
 
  puts "adding kim and image"
-    kim = User.create(first_name: "Kim", last_name: "Lee",  email: Faker::Internet.email, password_digest: '1234', age: Faker::Date.birthday(min_age: 18, max_age: 100), seeking_relationship: Faker::Boolean.boolean , address: Faker::Address.full_address)
+    kim = User.create(first_name: "Kim", last_name: "Lee",  email: Faker::Internet.email, password: '1234', age: Faker::Date.birthday(min_age: 18, max_age: 100), seeking_relationship: Faker::Boolean.boolean , address: Faker::Address.full_address)
 
  puts "adding images"
 
@@ -27,7 +27,7 @@
     puts "adding users👤"
 
     10.times do
-        User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password_digest: '1234', age: Faker::Date.birthday(min_age: 18, max_age: 100), seeking_relationship: Faker::Boolean.boolean , address: Faker::Address.full_address)
+        User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: '1234', age: Faker::Date.birthday(min_age: 18, max_age: 100), seeking_relationship: Faker::Boolean.boolean , address: Faker::Address.full_address)
     end
 
 

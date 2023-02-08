@@ -1,5 +1,6 @@
 class User < ApplicationRecord
     has_secure_password
+
     has_one_attached :avatar
 
     has_many :my_bookings, foreign_key: :lender_id ,class_name: 'Booking'
