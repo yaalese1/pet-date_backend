@@ -45,10 +45,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_05_063410) do
   create_table "bookings", force: :cascade do |t|
     t.string "time"
     t.string "date"
-    t.string "species"
     t.string "pickup_location"
     t.string "dropoff_location"
     t.boolean "pet_only"
+    t.integer "borrower_id"
+    t.integer "lender_id"
+    t.integer "pet_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -74,21 +76,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_05_063410) do
     t.boolean "trained"
     t.string "diet"
     t.string "size"
+    t.integer "owner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "tracker_devices", force: :cascade do |t|
     t.string "color"
+    t.bigint "pet_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["pet_id"], name: "index_tracker_devices_on_pet_id"
   end
 
   create_table "user_reviews", force: :cascade do |t|
     t.integer "star_rating"
     t.string "comments"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_reviews_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -106,4 +113,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_05_063410) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "pet_reviews", "pets"
+  add_foreign_key "tracker_devices", "pets"
 end
