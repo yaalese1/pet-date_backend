@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    before_action :authorize, only: [:show]
+    before_action :authorize, only: [:show, :user_profile]
 
 
 
@@ -22,6 +22,19 @@ class UsersController < ApplicationController
 
 
 
+     def user_profile
+        user = User.find_by(id: session[:user_id])
+        if user
+            render json: user , serializer: UserProfileSerializer, status: :ok
+        else
+            authorize
+        end
+ 
+     end 
+
+
+
+
 
     private
     def authorize
@@ -29,5 +42,7 @@ class UsersController < ApplicationController
       end
     def user_params
         params.permit(:first_name, :last_name, :email, :password, :password_confirmation, :age, :address, :seeking_relationship )
-    end  
+    end 
+    
+   
 end
