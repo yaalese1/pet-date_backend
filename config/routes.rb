@@ -12,5 +12,8 @@ Rails.application.routes.draw do
   get '/user', to: 'users#show'
   post '/login', to: 'sessions#login'
   delete '/logout', to: 'sessions#logout'
+  get '/lender' , to: 'users#lender_profile'
+
+  get '/user_profile', to: 'users#user_profile'
 
 end
