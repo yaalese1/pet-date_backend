@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
 
   resources :bookings, only: [:index, :show]
-  resources :pets
+  resources :pets, only: [:index]
   resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Defines the root path route ("/")
@@ -15,5 +15,7 @@ Rails.application.routes.draw do
   get '/lender' , to: 'users#lender_profile'
 
   get '/user_profile', to: 'users#user_profile'
+
+  get'/user_image', to: 'users#user_image'
 
 end
