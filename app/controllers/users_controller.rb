@@ -32,6 +32,28 @@ class UsersController < ApplicationController
  
      end 
 
+    # def user_profile
+    #     user = User.find_by(id: session[:user_id])
+    #   avatar = rails_blob_path(user.avatar)
+    #   if user
+    #     render json: user , serializer: UserProfileSerializer, status: :ok
+    # else
+    #     authorize
+    #   end
+    # end
+
+
+
+
+    def user_image
+        user = User.find_by(id: session[:user_id])
+        avatar = rails_blob_path(user.avatar)
+        if user 
+            render json: avatar
+        end
+    end 
+
+
 
 
 
