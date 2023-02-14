@@ -1,3 +1,5 @@
 class PetSerializer < ActiveModel::Serializer
-  attributes :name, :age, :species,  :breed, :size, :open_to_breeding, :mental_disorder, :active, :trained, :diet
+  attributes :id, :name, :age, :species,  :breed, :size, :open_to_breeding, :mental_disorder, :active, :trained, :diet
+
+  has_many :pet_reviews
 end

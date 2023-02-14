@@ -17,5 +17,5 @@ Rails.application.routes.draw do
   get '/user_profile', to: 'users#user_profile'
 
   get'/user_image', to: 'users#user_image'
-
+  
 end
