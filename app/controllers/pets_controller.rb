@@ -33,5 +33,5 @@ def find_pet
 end 
 
 def pet_params
-    params.permit(:name, :age, :mental_disorder, :active, :trained, :diet, :size)
+    params.permit(:name, :species, :breed ,:age, :mental_disorder, :active, :trained, :diet, :size)
 end

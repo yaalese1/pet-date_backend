@@ -1,7 +1,7 @@
 class User < ApplicationRecord
     validates :email, uniqueness: true
     # validates :age, presences: true, inclusion:{ only_integer: greater_than 17 }
-    validates :password, length: { in: 4..12 }
+    # validates :password, length: { in: 4..12 }
 
     has_secure_password
 
