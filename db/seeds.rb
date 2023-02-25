@@ -31,9 +31,12 @@
     end
 
 
-        puts "adding pets 🐶"
-
+        puts "adding kims pets 🐶"
+    8.times do 
         Pet.create(name: Faker::Creature::Dog.name, age: Faker::Creature::Dog.age, species: "dog" , breed: Faker::Creature::Dog.breed, open_to_breeding: Faker::Boolean.boolean, alteration:Faker::Boolean.boolean, mental_disorder: "anxeity" , active: Faker::Boolean.boolean,trained: Faker::Boolean.boolean, diet: Faker::Food.dish,  size: Faker::Creature::Dog.size, owner_id: User.first.id)
+    end
+
+      puts "adding other pets"
 
         Pet.create(name: Faker::Creature::Bird.common_name, age: "immature", species: "bird", breed: "Lovebirds", open_to_breeding: Faker::Boolean.boolean, alteration:Faker::Boolean.boolean, active: Faker::Boolean.boolean,trained: Faker::Boolean.boolean, diet: Faker::Food.dish, size: "medium", owner_id: User.second.id)
 
@@ -56,7 +59,7 @@
             UserReview.create(star_rating: (rand 1..5), comments: Faker::Lorem.paragraph(sentence_count:3), user: User.all.sample)
         end
         puts "tracker device"
-        3.times do 
+        16.times do 
             TrackerDevice.create(color: Faker::Color.color_name, pet: Pet.all.sample)
         end
 
