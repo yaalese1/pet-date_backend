@@ -1,6 +1,6 @@
 class Pet < ApplicationRecord
-    validates :name, presence: true,  uniqueness: true
-    validates :species,  presence: true,
+    # validates :name, presence: true,  uniqueness: true
+    # validates :species,  presence: true
 
  belongs_to :owner, class_name: 'User'
 
