@@ -7,6 +7,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :password_digest
       t.string :age
       t.string :address
+      t.string :about_me
       t.boolean :seeking_relationship 
 
 

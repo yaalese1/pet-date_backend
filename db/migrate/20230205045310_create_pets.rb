@@ -12,6 +12,9 @@ class CreatePets < ActiveRecord::Migration[7.0]
       t.boolean :trained
       t.string :diet
       t.string :size
+      t.string :state
+      t.string :city
+      t.string :zip_code
       t.integer :owner_id
     
       t.timestamps
