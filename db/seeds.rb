@@ -14,7 +14,7 @@
  puts "destroying DB"
 
  puts "adding kim and image"
-    kim = User.create(first_name: "Kim", last_name: "Lee",  email: Faker::Internet.email, password: '1234', age: Faker::Date.birthday(min_age: 18, max_age: 100), seeking_relationship: Faker::Boolean.boolean , address: Faker::Address.full_address)
+    kim = User.create(first_name: "Kim", last_name: "Lee",  email: Faker::Internet.email, password: '1234', age: Faker::Date.birthday(min_age: 18, max_age: 100), seeking_relationship: Faker::Boolean.boolean , address: Faker::Address.full_address, about_me: Faker::Lorem.paragraph(sentence_count:3) )
 
  puts "adding images"
 
@@ -33,20 +33,42 @@
 
         puts "adding kims pets 🐶"
     8.times do 
-        Pet.create(name: Faker::Creature::Dog.name, age: Faker::Creature::Dog.age, species: "dog" , breed: Faker::Creature::Dog.breed, open_to_breeding: Faker::Boolean.boolean, alteration:Faker::Boolean.boolean, mental_disorder: "anxeity" , active: Faker::Boolean.boolean,trained: Faker::Boolean.boolean, diet: Faker::Food.dish,  size: Faker::Creature::Dog.size, owner_id: User.first.id)
+        Pet.create(name: Faker::Creature::Dog.name, age: Faker::Creature::Dog.age, species: "dog" , breed: Faker::Creature::Dog.breed, open_to_breeding: Faker::Boolean.boolean, alteration:Faker::Boolean.boolean, mental_disorder: "anxeity" , active: Faker::Boolean.boolean,trained: Faker::Boolean.boolean, diet: Faker::Food.dish,  size: Faker::Creature::Dog.size, owner_id: User.first.id, state: "NY", city: "New York", zip_code: "11211")
     end
 
       puts "adding other pets"
 
-        Pet.create(name: Faker::Creature::Bird.common_name, age: "immature", species: "bird", breed: "Lovebirds", open_to_breeding: Faker::Boolean.boolean, alteration:Faker::Boolean.boolean, active: Faker::Boolean.boolean,trained: Faker::Boolean.boolean, diet: Faker::Food.dish, size: "medium", owner_id: User.second.id)
+        Pet.create(name: Faker::Creature::Bird.common_name, age: "immature", species: "bird", breed: "Lovebirds", open_to_breeding: Faker::Boolean.boolean, alteration:Faker::Boolean.boolean, active: Faker::Boolean.boolean,trained: Faker::Boolean.boolean, diet: Faker::Food.dish, size: "medium",   state: Faker::Address.state_abbr, city: Faker::Address.city, zip_code: Faker::Address.zip_code, owner_id: User.second.id)
 
-        Pet.create(name: Faker::Creature::Cat.name, age: "Kitten", species:     "cat", breed: Faker::Creature::Cat.breed, open_to_breeding: Faker::Boolean.boolean, alteration: Faker::Boolean.boolean, active: Faker::Boolean.boolean, trained: Faker::Boolean.boolean, diet:Faker::Food.dish, size: "mini", owner_id: User.second.id)
+        Pet.create(name: Faker::Creature::Cat.name, age: "Kitten", species:     "cat", breed: Faker::Creature::Cat.breed, open_to_breeding: Faker::Boolean.boolean, alteration: Faker::Boolean.boolean, active: Faker::Boolean.boolean, trained: Faker::Boolean.boolean, diet:Faker::Food.dish, size: "mini", owner_id: User.second.id, state: Faker::Address.state_abbr, city: Faker::Address.city, zip_code: Faker::Address.zip_code)
      
         puts "adding bookings 📆"
       
-        4.times do
+       1.times do
             pet = Pet.all.sample
-            Booking.create!(time: "2:00pm", date: Faker::Date.in_date_period(month: 2), pickup_location: Faker::Address.full_address, dropoff_location: Faker::Address.full_address, pet_only: Faker::Boolean.boolean, lender_id: pet.owner.id, borrower_id: User.last(8).sample.id, pet_id: pet.id)
+            Booking.create!(start_time: "2:00pm", end_time:"3:00pm", start_date: Faker::Date.in_date_period(month: 3), end_date: Faker::Date.in_date_period(month: 3), pickup_location: Faker::Address.full_address, dropoff_location: Faker::Address.full_address, pet_only: Faker::Boolean.boolean, lender_id: pet.owner.id, borrower_id: User.last(8).sample.id, pet_id: pet.id)
+        end
+        1.times do
+            pet = Pet.all.sample
+            Booking.create!(start_time: "5:00pm", end_time:"8:00pm", start_date: Faker::Date.in_date_period(month: 3), end_date: Faker::Date.in_date_period(month: 3), pickup_location: Faker::Address.full_address, dropoff_location: Faker::Address.full_address, pet_only: Faker::Boolean.boolean, lender_id: pet.owner.id, borrower_id: User.last(8).sample.id, pet_id: pet.id)
+        end
+        1.times do
+            pet = Pet.all.sample
+            Booking.create!(start_time: "1:00pm", end_time:"3:00pm", start_date: Faker::Date.in_date_period(month: 3), end_date: Faker::Date.in_date_period(month: 3), pickup_location: Faker::Address.full_address, dropoff_location: Faker::Address.full_address, pet_only: Faker::Boolean.boolean, lender_id: pet.owner.id, borrower_id: User.last(8).sample.id, pet_id: pet.id)
+        end
+
+        1.times do
+            pet = Pet.all.sample
+            Booking.create!(start_time: "12:00pm", end_time:"3:00pm", start_date: Faker::Date.in_date_period(month: 3), end_date: Faker::Date.in_date_period(month: 3), pickup_location: Faker::Address.full_address, dropoff_location: Faker::Address.full_address, pet_only: Faker::Boolean.boolean, lender_id: pet.owner.id, borrower_id: User.last(8).sample.id, pet_id: pet.id)
+        end
+        1.times do
+            pet = Pet.all.sample
+            Booking.create!(start_time: "2:00pm", end_time:"7:00pm", start_date: Faker::Date.in_date_period(month: 3), end_date: Faker::Date.in_date_period(month: 3), pickup_location: Faker::Address.full_address, dropoff_location: Faker::Address.full_address, pet_only: Faker::Boolean.boolean, lender_id: pet.owner.id, borrower_id: User.last(8).sample.id, pet_id: pet.id)
+        end
+
+        1.times do
+            pet = Pet.all.sample
+            Booking.create!(start_time: "8:00am", end_time:"3:00pm", start_date: Faker::Date.in_date_period(month: 3), end_date: Faker::Date.in_date_period(month: 3), pickup_location: Faker::Address.full_address, dropoff_location: Faker::Address.full_address, pet_only: Faker::Boolean.boolean, lender_id: pet.owner.id, borrower_id: User.last(8).sample.id, pet_id: pet.id)
         end
             
         puts "pet_reviews"

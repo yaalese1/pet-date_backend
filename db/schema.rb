@@ -43,8 +43,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_05_063410) do
   end
 
   create_table "bookings", force: :cascade do |t|
-    t.string "time"
-    t.string "date"
+    t.string "start_time"
+    t.string "end_time"
+    t.string "start_date"
+    t.string "end_date"
     t.string "pickup_location"
     t.string "dropoff_location"
     t.boolean "pet_only"
@@ -76,6 +78,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_05_063410) do
     t.boolean "trained"
     t.string "diet"
     t.string "size"
+    t.string "state"
+    t.string "city"
+    t.string "zip_code"
     t.integer "owner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -105,6 +110,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_05_063410) do
     t.string "password_digest"
     t.string "age"
     t.string "address"
+    t.string "about_me"
     t.boolean "seeking_relationship"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
