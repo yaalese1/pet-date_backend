@@ -57,6 +57,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_05_063410) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "images", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "pet_reviews", force: :cascade do |t|
     t.bigint "pet_id", null: false
     t.integer "star_rating"
@@ -108,9 +113,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_05_063410) do
     t.string "last_name"
     t.string "email"
     t.string "password_digest"
-    t.string "age"
-    t.string "address"
+    t.integer "age"
+    t.string "city"
+    t.string "state"
+    t.string "zip_code"
     t.string "about_me"
+    t.string "pronouns"
     t.boolean "seeking_relationship"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

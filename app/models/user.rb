@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+    
     validates :email, uniqueness: true
     # validates :age, presences: true, inclusion:{ only_integer: greater_than 17 }
     # validates :password, length: { in: 4..12 }
@@ -18,5 +19,8 @@ class User < ApplicationRecord
 
     has_many :user_reviews
 
+    def avatar_url
+        Rails.application.routes.url_helpers.url_for(avatar) if avatar.attached?
+      end
 
 end

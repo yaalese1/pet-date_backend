@@ -5,11 +5,13 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :last_name
       t.string :email
       t.string :password_digest
-      t.string :age
-      t.string :address
+      t.integer :age
+      t.string :city
+      t.string :state
+      t.string :zip_code
       t.string :about_me
-      t.boolean :seeking_relationship 
-
+      t.string :pronouns
+      t.boolean :seeking_relationship
 
       t.timestamps
     end
