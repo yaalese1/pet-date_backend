@@ -30,23 +30,31 @@ class UsersController < ApplicationController
 
       def update
         edit_user = User.find(params[:id])
-        edit_user.update!( about_me_params)
-        render json: edit_user, status: 201
+        edit_user.update!(user_params)
+        render json: edit_user,  status: 201
       end
 
 
+
+
+
+#  def update_user_profile
+#     edit_user_profile = User.find(params[:id])
+#     edit_user_profile.update!(user_params)
+#     render json: edit_user_profile, status: 201
+#  end
   
 
 
 
 
-    def user_image
-        user = User.find_by(id: session[:user_id])
-        avatar = rails_blob_path(user.avatar)
-        if user 
-            render json: avatar
-        end
-    end 
+    # def user_image
+    #     user = User.find_by(id: session[:user_id])
+    #     avatar = rails_blob_path(user.avatar)
+    #     if user 
+    #         render json: avatar
+    #     end
+    # end 
 
 
 
@@ -57,9 +65,14 @@ class UsersController < ApplicationController
     def authorize
         return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
       end
+
     def user_params
         params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :age, :about_me, :city, :state, :zip_code, :pronouns, :seeking_relationship, :avatar )
     end 
+
+    def user_update_params
+        params.permit(:first_name )
+    end
     def about_me_params
         params.permit(:about_me)
     end

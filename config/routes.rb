@@ -24,4 +24,7 @@ Rails.application.routes.draw do
   delete '/pet_reviews/:id', to: 'pets#delete_pet_review'
   get'/pets/:pet_id/pet_reviews', to: "pets#pet_read"
 
+
+  # patch'/settings/:id', to: 'users#update_user_profile'
+
 end
