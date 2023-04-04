@@ -32,6 +32,14 @@ end
 
 
     puts "adding kims pets 🐶"
+
+    tim = Pet.create(name: "Tim", age:"Young", species:"frog",open_to_breeding: Faker::Boolean.boolean, alteration:Faker::Boolean.boolean, mental_disorder: "anxeity" , active: Faker::Boolean.boolean,trained: Faker::Boolean.boolean, diet: Faker::Food.dish, size:"small", owner_id: User.first.id, state: "NY", city: "New York", zip_code: "11211" )
+
+    tim.image.attach(
+        io: File.open('./public/avatars/snake.png'),
+        filename: 'snake.png',
+        content_type: 'application/png'
+    )
 8.times do 
     Pet.create(name: Faker::Creature::Dog.name, age: Faker::Creature::Dog.age, species: "dog" , breed: Faker::Creature::Dog.breed, open_to_breeding: Faker::Boolean.boolean, alteration:Faker::Boolean.boolean, mental_disorder: "anxeity" , active: Faker::Boolean.boolean,trained: Faker::Boolean.boolean, diet: Faker::Food.dish,  size: Faker::Creature::Dog.size, owner_id: User.first.id, state: "NY", city: "New York", zip_code: "11211")
 end

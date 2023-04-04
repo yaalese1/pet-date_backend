@@ -30,8 +30,9 @@ class UsersController < ApplicationController
 
       def update
         edit_user = User.find(params[:id])
+    
         edit_user.update!(user_params)
-        render json: edit_user,  status: 201
+        render json: edit_user,  serializer: UserProfileSerializer, status: 201
       end
 
 
@@ -67,12 +68,10 @@ class UsersController < ApplicationController
       end
 
     def user_params
-        params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :age, :about_me, :city, :state, :zip_code, :pronouns, :seeking_relationship, :avatar )
+        params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :age, :about_me, :city, :state, :zip_code, :pronouns, :seeking_relationship,:avatar)
     end 
 
-    def user_update_params
-        params.permit(:first_name )
-    end
+ 
     def about_me_params
         params.permit(:about_me)
     end

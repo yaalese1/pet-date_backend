@@ -12,9 +12,10 @@ class PetsController < ApplicationController
     end
 
     def update 
-        edit_pet = find_pet
+      
+        edit_pet = Pet.find(params[:id])
         edit_pet.update!(pet_params)
-        render json: edit_pet, status: :ok
+        render json: edit_pet, serializer: PetSerializer, status: :ok
     end
 
     def destroy
@@ -60,7 +61,7 @@ class PetsController < ApplicationController
     end 
 
     def pet_params
-    params.permit(:name, :species, :breed ,:age, :open_to_breeding,:mental_disorder, :active, :trained, :diet, :size,  :owner_id)
+    params.require(:pet).permit(:name, :species, :breed ,:age, :open_to_breeding,:mental_disorder, :active, :trained, :alteration, :diet, :size,  :owner_id, :image)
     end
 
 
