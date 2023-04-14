@@ -1,5 +1,5 @@
 class PetsController < ApplicationController
-
+   
     def index
         pets = Pet.all
         render json: pets,  status: 201
@@ -61,7 +61,7 @@ class PetsController < ApplicationController
     end 
 
     def pet_params
-    params.require(:pet).permit(:name, :species, :breed ,:age, :open_to_breeding,:mental_disorder, :active, :trained, :alteration, :diet, :size,  :owner_id, :image)
+    params.require(:pet).permit(:name, :species, :breed ,:age, :open_to_breeding,:mental_disorder, :active, :trained, :alteration, :diet, :size, :state, :city, :zip_code, :owner_id, :image)
     end
 
 

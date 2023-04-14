@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-    before_action :authorize, only: [:show, :user_profile]
+    before_action :authorize, only: [:show, :user_profile,:update]
 
 
 
@@ -26,16 +26,38 @@ class UsersController < ApplicationController
             end
      
      end
-     
+
+
+
+   
+
 
       def update
         edit_user = User.find(params[:id])
-    
         edit_user.update!(user_params)
         render json: edit_user,  serializer: UserProfileSerializer, status: 201
       end
 
+      def pet_booking_for_user
+        pet_booking = User.find(params[:id])
+        pet_booking.pet_bookings.create!(booking_params)
+        render json: pet_booking , serializer: UserProfileSerializer, status: 201
 
+      end
+
+
+    #   def owner_booking_update_for_owners_pets
+        
+    #     owner_booking = User.find(params[:id])
+       
+    #     update_owner_booking = owner_booking.my_bookings.find_by(params[:lender_id])
+    #     update_owner_booking.update!(booking_params)
+    #   if  update_owner_booking
+    #     render json:  update_owner_booking ,serializer: BookingSerializer, status: 201
+    #   else
+    #     render json: { error: "Not authorized"}
+    #   end
+    #   end
 
 
 
@@ -44,39 +66,31 @@ class UsersController < ApplicationController
 #     edit_user_profile.update!(user_params)
 #     render json: edit_user_profile, status: 201
 #  end
-  
-
-
-
-
-    # def user_image
-    #     user = User.find_by(id: session[:user_id])
-    #     avatar = rails_blob_path(user.avatar)
-    #     if user 
-    #         render json: avatar
-    #     end
-    # end 
-
-
-
-
 
 
     private
     def authorize
-        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
+        return render json: { error: "Not authorized Login or sign up to Pet & Date" }, status: :unauthorized unless session.include? :user_id
       end
 
     def user_params
-        params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :age, :about_me, :city, :state, :zip_code, :pronouns, :seeking_relationship,:avatar)
+        params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :age, :about_me, :city, :state, :zip_code, :pronouns, :seeking_relationship,:avatar, :my_bookings, :pet_bookings)
     end 
 
- 
-    def about_me_params
-        params.permit(:about_me)
+
+    def booking_params
+       params.permit(:start_time,:end_time,:start_date,:end_date,  :pickup_location,:dropoff_location, :pet_only, :lender_id, :borrower_id, :pet_id)
     end
+
+   def owner_booking_params
+    params.permit( :start_time,:end_time,:start_date,:end_date,  :pickup_location,:dropoff_location, :pet_only, :lender_id, :borrower_id, :pet_id)
+   end
+ 
+    # def about_me_params
+    #     params.permit(:about_me)
+    # end
     
-   
+ 
 end
 
 

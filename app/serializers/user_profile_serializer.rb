@@ -11,7 +11,9 @@ class UserProfileSerializer < ActiveModel::Serializer
   has_many :my_bookings
   
   has_many :pet_bookings
+  
 
+  
 
 
 end

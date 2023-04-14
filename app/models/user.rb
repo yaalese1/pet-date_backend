@@ -15,7 +15,7 @@ class User < ApplicationRecord
     has_many :lenders, through: :pet_bookings
 
     # has_many :bookings
-    has_many :pets, foreign_key: :owner_id, class_name: 'Pet'
+    has_many :pets, foreign_key: :owner_id, class_name: 'Pet', dependent: :destroy
 
     has_many :user_reviews
 
