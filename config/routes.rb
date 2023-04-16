@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 
-  resources :bookings, only: [:index, :show,:create,:update,:destroy]
+  resources :bookings, only: [:index,:update,:destroy]
   resources :pets, only: [:index, :update, :destroy, :create]
   resources :users, only: [:update]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

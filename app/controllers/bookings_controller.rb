@@ -8,18 +8,18 @@ class BookingsController < ApplicationController
         render json: bookings
     end
 
-    def show
-        booking = Booking.find_by(params[:borrower_id])
+    # def show
+    #     booking = Booking.find_by(params[:borrower_id])
 
 
-        render json: booking
-    end
+    #     render json: booking
+    # end
 
 
-        def create
-            new_booking = Booking.create!(booking_params)
-            render json: new_booking, status: 201
-        end
+    #     def create
+    #         new_booking = Booking.create!(booking_params)
+    #         render json: new_booking, status: 201
+    #     end
 
         def update
             edit_booking = Booking.find(params[:id])

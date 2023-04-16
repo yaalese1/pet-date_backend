@@ -2,7 +2,7 @@ class Pet < ApplicationRecord
     # validates :name, presence: true,  uniqueness: true
     # validates :species,  presence: true
 
-    has_one_attached :image
+has_one_attached :image
 
  belongs_to :owner, class_name: 'User'
 
