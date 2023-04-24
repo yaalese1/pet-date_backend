@@ -8,12 +8,16 @@ class BookingsController < ApplicationController
         render json: bookings
     end
 
-    # def show
-    #     booking = Booking.find_by(params[:borrower_id])
+    def show
+        booking = Booking.find(params[:id])
+    
+        bookinginfo = booking.lender
+        
+       booking_image = bookinginfo.avatar_url
+        
 
-
-    #     render json: booking
-    # end
+        render json: booking_image
+    end
 
 
     #     def create

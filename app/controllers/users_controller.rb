@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-
-    before_action :authorize, only: [:show, :user_profile,:update]
+    rescue_from ActiveRecord::RecordNotFound, with: :user_not_found
+    rescue_from ActiveRecord::RecordInvalid, with: :render_uprocessable_entity
+    # before_action :authorize, only: [:show, :user_profile]
 
 
 
@@ -11,8 +12,8 @@ class UsersController < ApplicationController
         if user.valid?
             session[:user_id] = user.id
             render json: user, status: :created
-        else
-            render json: { error: user.errors.full_messages }, status: :unprocessable_entity
+        # else
+        #     render json: { error: user.errors.full_messages }, status: :unprocessable_entity
         end
     end
 
@@ -20,20 +21,26 @@ class UsersController < ApplicationController
      def show
         user = User.find_by(id: session[:user_id])
         if user 
-        render json: user, serializer: UserProfileSerializer, status: :ok
-            else
-                authorize
+        render json: user,serializer: UserProfileSerializer, status: :ok
+            # else
+            #     authorize
             end
      
      end
 
 
+def update_avatar
+    edit_avatar = User.find(params[:id])
+    edit_avatar.update!(avatar_params)
 
+    render json: edit_avatar  ,status: 201
+end 
    
 
 
       def update
         edit_user = User.find(params[:id])
+
         edit_user.update!(user_params)
         render json: edit_user,  serializer: UserProfileSerializer, status: 201
       end
@@ -41,7 +48,7 @@ class UsersController < ApplicationController
       def pet_booking_for_user
         pet_booking = User.find(params[:id])
         pet_booking.pet_bookings.create!(booking_params)
-        render json: pet_booking , serializer: UserProfileSerializer, status: 201
+        render json: pet_booking , serializer: UserProfileSerializer, include: ['user'] , fields: { user: ['avatar',"avatar_url"]},status: 201
 
       end
 
@@ -69,9 +76,17 @@ class UsersController < ApplicationController
 
 
     private
-    def authorize
-        return render json: { error: "Not authorized Login or sign up to Pet & Date" }, status: :unauthorized unless session.include? :user_id
-      end
+
+    def render_uprocessable_entity (invalid)
+        render json: {errors: invalid.record.errors}, status: :unprocessable_entity
+    end
+
+    def user_not_found
+        render json:{error:["user not found"]}, status: :not_found
+    end
+    # def authorize
+    #     return render json: { error: "Not authorized Login or sign up to Pet & Date" }, status: :unauthorized unless session.include? :user_id
+    #   end
 
     def user_params
         params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :age, :about_me, :city, :state, :zip_code, :pronouns, :seeking_relationship,:avatar, :my_bookings, :pet_bookings, :avatar_url)
@@ -86,9 +101,9 @@ class UsersController < ApplicationController
     params.permit( :start_time,:end_time,:start_date,:end_date,  :pickup_location,:dropoff_location, :pet_only, :lender_id, :borrower_id, :pet_id)
    end
  
-    # def about_me_params
-    #     params.permit(:about_me)
-    # end
+    def avatar_params
+        params.require(:user).permit(:avatar, :password, :password_confirmation)
+    end
     
  
 end

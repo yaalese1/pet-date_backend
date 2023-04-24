@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 
-  resources :bookings, only: [:index,:update,:destroy]
+  resources :bookings, only: [:index,:update,:destroy,:show]
   resources :pets, only: [:index, :update, :destroy, :create]
   resources :users, only: [:update]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   # get `/#{User.first_name}`, to: 'users#show'
   get '/user', to: 'users#show'
   post '/login', to: 'sessions#login'
+  patch '/user/:id' ,to: 'users#update_avatar'
   delete '/logout', to: 'sessions#logout'
   get '/lender' , to: 'users#lender_profile'
 
