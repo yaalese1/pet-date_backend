@@ -48,7 +48,7 @@ end
       def pet_booking_for_user
         pet_booking = User.find(params[:id])
         pet_booking.pet_bookings.create!(booking_params)
-        render json: pet_booking , serializer: UserProfileSerializer, include: ['user'] , fields: { user: ['avatar',"avatar_url"]},status: 201
+        render json: pet_booking , serializer: UserProfileSerializer,status: 201
 
       end
 
